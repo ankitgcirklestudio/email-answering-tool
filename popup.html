@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Email Reply Assistant</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div class="headerTop">
+          <div class="title">AI Email Reply Assistant</div>
+          <button id="closeBtn" class="iconBtn" type="button" title="Close">
+            ✕
+          </button>
+        </div>
+        <div class="subtitle">Generate 1 polished reply from your draft.</div>
+      </header>
+
+      <section class="panel">
+        <details class="settings" id="settingsDetails">
+          <summary class="settingsSummary">
+            <span>Settings</span>
+            <span class="settingsHint">API key + model</span>
+          </summary>
+
+          <div class="settingsGrid">
+            <label class="label" for="provider">Provider</label>
+            <select id="provider" class="select">
+              <option value="google" selected>Google AI Studio (Gemini)</option>
+              <option value="openai">OpenAI</option>
+            </select>
+            <div class="help">
+              Choose which API key you want to use for generation.
+            </div>
+
+            <label class="label" for="apiKey">API Key</label>
+            <input
+              id="apiKey"
+              class="input"
+              type="password"
+              placeholder="Paste your API key"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <div class="help">
+              Stored locally in extension storage on this browser.
+            </div>
+
+            <label class="label" for="model">Model</label>
+            <input
+              id="model"
+              class="input"
+              type="text"
+              placeholder="gemini-2.0-flash"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <div class="help">You can change this if your account needs it.</div>
+          </div>
+        </details>
+      </section>
+
+      <section class="panel">
+        <label class="label" for="clientEmail">Client Email</label>
+        <textarea
+          id="clientEmail"
+          class="textarea"
+          placeholder="Paste the client's email here..."
+          rows="6"
+        ></textarea>
+
+        <label class="label" for="draftReply">My Draft Reply</label>
+        <textarea
+          id="draftReply"
+          class="textarea"
+          placeholder="Write your rough reply here..."
+          rows="6"
+        ></textarea>
+
+        <div class="row">
+          <div class="col colRight">
+            <div class="buttonRow">
+              <button id="generateBtn" class="btnPrimary" type="button">
+                Generate Reply
+              </button>
+              <button
+                id="rephraseBtn"
+                class="btnSecondary"
+                type="button"
+                title="Re-phrase with the same tone and approximate length"
+              >
+                Re-phrase
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="statusRow">
+          <div id="spinner" class="spinner hidden" aria-hidden="true"></div>
+          <div id="status" class="status" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="outputHeader">
+          <div class="outputTitle">Output</div>
+          <button id="clearBtn" class="btnGhost" type="button" title="Clear current data">
+            Clear
+          </button>
+        </div>
+
+        <div id="output" class="output"></div>
+      </section>
+
+      <section class="panel">
+        <details class="history">
+          <summary class="settingsSummary">
+            <span>Previous generations</span>
+            <span class="settingsHint" id="historyCount">0</span>
+          </summary>
+          <div class="historyHeader">
+            <button
+              id="clearHistoryBtn"
+              class="tinyBtn"
+              type="button"
+              title="Erase saved history"
+            >
+              Clear History
+            </button>
+          </div>
+          <div id="history" class="historyList"></div>
+        </details>
+      </section>
+
+      <footer class="footer">
+        <span class="muted">Tip: keep replies concise and specific.</span>
+      </footer>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
+
